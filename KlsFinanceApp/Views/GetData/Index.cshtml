@@ -1,0 +1,52 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Market Value for All Portfolios";
+}
+
+<h2>Market Value for All Portfolios</h2>
+
+    <table style="width:100%;color:#333;border:0">
+        <thead>
+            <tr>
+                <th style="width:20%;vertical-align:middle;text-align:left;">Portfolio</th>
+                <th style="vertical-align:middle;text-align:center;">Trans Date</th>
+                <th style="vertical-align:middle;text-align:left;">Buy Type</th>
+                <th style="vertical-align:middle;text-align:left;">Symbol</th>
+                <th style="width:25%;vertical-align:middle;text-align:left;">Symbol Name</th>
+                <th style="vertical-align:middle;text-align:right;">Quantity</th>
+                <th style="vertical-align:middle;text-align:right;">Price</th>
+                <th style="vertical-align:middle;text-align:right;">Size</th>
+                <th style="vertical-align:middle;text-align:right;">Market Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*//0=portfolio_id
+            //1=portfolio_name
+            //2=transaction_date
+            //3=transaction_type
+            //4=symbol_id
+            //5=symbol_code
+            //6=symbol_name
+            //7=quantity
+            //8=price
+            //9=size
+            //10=market value*@
+            @{
+                foreach(System.Data.DataRow row in Model.Rows)
+                {
+                    <tr style="border-top:1px solid #e8e8eb;">
+                        <td style="text-align:left;">@row[1]</td>
+                        <td style="text-align:center;">@DateTime.Parse(@row[2].ToString()).ToString("yyyy-MM-dd")</td>
+                        <td style="text-align:left;">@row[3]</td>
+                        <td style="text-align:left;">@row[5]</td>
+                        <td style="text-align:left;">@row[6]</td>
+                        <td style="text-align:right;">@row[7]</td>
+                        <td style="text-align:right;">@String.Format("{0:n}",Decimal.Parse(@row[8].ToString()))</td>
+                        <td style="text-align:right;">@String.Format("{0:n}",Decimal.Parse(@row[9].ToString()))</td>
+                        <td style="text-align:right;">@String.Format("{0:n}",Decimal.Parse(@row[10].ToString()))</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
